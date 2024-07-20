@@ -1,0 +1,46 @@
+server:
+  port: 8088
+#  ssl:
+    # enable/disable https
+#    enabled: true
+#    key-store: classpath:tls/client/identity.jks
+#    key-store-password: secret
+#    key-store-type: JKS
+#    key-alias: client
+#    key-store-provider: SUN
+    #trust store location
+#    trust-store: classpath:tls/client/truststore.jks
+    #trust store password
+#    trust-store-password: secret
+#    trust-store-type: JKS
+
+spring:
+  application:
+    name: Client-Application
+#  cloud: # This is the old way of configuring Config Server Client
+#    config:
+#      uri: http://localhost:8080
+#      enabled: true
+  config:
+    # http://localhost:8080/Client-Application/dev
+    import: configserver:https://localhost:8080
+  cloud:
+    config:
+      username: admin
+      password: '{cipher}233f4068e8ba4427c36156ae946a4c6a3578e600e5fb119c50a2a98e533070d3'
+
+
+
+# Symmetric key  
+encrypt:
+  key: 7752030C95B3446094F0FA7EC766BC03 # pass this key as an environment variable for more security
+  
+#   Asymmetric key
+#   keytool -genkeypair -alias mytestkey -keyalg RSA -dname "CN=Web Server,OU=Unit,O=Organization,L=City,S=State,C=US" \
+#           -keypass adminyahya -keystore server.jks -storepass adminyahya
+# encrypt:
+#   keyStore:
+#     location: file:///C:/Users/Yahya/server.jks
+#     password: adminyahya
+#     alias: mytestkey
+#     secret: adminyahya
